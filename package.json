@@ -1,0 +1,36 @@
+{
+  "name": "cypresspractice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "open": "cypress open",
+    "headless": "node ./index.js && cypress run",
+    "chrome": "cypress run --browser chrome",
+    "afterTest": "node cucumber-html-report.js",
+    "test": "(npm run chrome && npm run afterTest) || npm run afterTest",
+    "reports": "mochawesome-merge cypress/reports/test-case/*.json > cypress/reports/test-case/reports.json && marge cypress/reports/test-case/reports.json --reportDir ./ --inline"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cucumber-html-reporter": "^5.5.0",
+    "cypress": "^9.6.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "mochawesome-merge": "^4.2.1",
+    "multiple-cucumber-html-reporter": "^2.0.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/integration/Feature_Files",
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/reports/cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
+  },
+  "dependencies": {
+    "mochawesome": "^6.2.2",
+    "soft-assert": "^0.2.6"
+  }
+}
